@@ -1,5 +1,5 @@
 Import-Module Get-ChildItemColor
-$env:PATH="${env:HOME}:${env:PATH}"
+$env:PATH="${env:HOME}/.local/bin/:${env:PATH}"
 $hostname = [Environment]::MachineName
 $env:GPG_TTY=$(tty)
 function Prompt {"${env:USER}@${hostname} $(Get-Location)$ "}
@@ -30,7 +30,9 @@ function Backup-PageToArchive {
 	# Backup the page to the archive
 	$env:OUTPUT_DIR = $Directory
 	$env:TIMEOUT = "240"
-	Write-Output -Message $Url | /home/alc/git/github/ab/ArchiveBox/archive
+	$archive = "${env:HOME}/git/github/ab/ArchiveBox/archive"
+
+	Write-Output -Message $Url | python $archive
 }
 
 <#
